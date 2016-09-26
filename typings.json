@@ -1,0 +1,7 @@
+{
+  "name": "ts-starter",
+  "dependencies": {},
+  "globalDependencies": {
+    "node": "registry:dt/node#6.0.0+20160925070332"
+  }
+}
