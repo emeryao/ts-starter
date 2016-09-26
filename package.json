@@ -1,8 +1,8 @@
 {
     "name": "ts-starter",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "version": "0.1.0",
+    "description": "Initiate a TypeScript working folder.",
+    "main": "dist/tss.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -12,7 +12,18 @@
     "engines": {
         "node": ">=6.0.0"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+    "keywords": [
+        "ts-starter",
+        "tss",
+        "typescript-starter"
+    ],
+    "author": "Emeryao",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Emeryao/ts-starter.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Emeryao/ts-starter/issues"
+    },
+    "license": "MIT"
 }
