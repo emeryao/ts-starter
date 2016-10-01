@@ -1,8 +1,9 @@
+[![NPM](https://nodei.co/npm/ts-starter.png?downloads=true&stars=true)](https://nodei.co/npm/ts-starter/)
 # ts-starter
 A command line tool for starting a typescript work folder
-## Installation :
+## Installation
 `npm install -g ts-starter`
-## Usage :
+## Usage
 Type `tss new-folder-name` into the console 
 and a new folder with the name `new-folder-name` will be the new working folder for [TypeScript](http://www.typescriptlang.org/)
 
