@@ -9,12 +9,25 @@ async function main() {
     let param = process.argv[2];
 
     if (!param || param.length < 1) {
-        console.log('Please provide a folder name :-)');
+        console.log('USAGE:');
+        console.log('\tPlease provide a name for the new working folder in TypeScript.');
+        console.log('\teg. "tss new-folder"');
         return;
     }
 
     console.log('create new folder...');
     if ((await mkdirAsync(param)) == false) {
+        return;
+    }
+
+    console.log('git init...');
+    if ((await execAsync('git init', { encoding: 'utf8', cwd: param })) == false) {
+        console.log('git init fail');
+        return;
+    }
+
+    if ((await writeFileAsync(`${param}/.gitignore`, 'node_modules\r\ndist\r\n')) == false) {
+        console.log('config tsconfig.json fail');
         return;
     }
 
@@ -48,6 +61,7 @@ async function main() {
 
     tsconfig.compilerOptions.target = 'es2015';
     tsconfig.compilerOptions.outDir = 'dist';
+    tsconfig.exclude = ['node_modules'];
 
     if ((await writeFileAsync(`${param}/tsconfig.json`, JSON.stringify(tsconfig))) == false) {
         console.log('config tsconfig.json fail');
@@ -72,5 +86,6 @@ async function main() {
         return;
     }
 
-    console.log('DONE');
+    console.log('DONE!');
+    console.log('ENJOY TypeScript!');
 }
