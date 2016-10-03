@@ -1,6 +1,6 @@
 [![NPM](https://nodei.co/npm/ts-starter.png?downloads=true&stars=true)](https://nodei.co/npm/ts-starter/)
 # ts-starter
-A command line tool for starting a typescript work folder
+A command line tool for starting a [TypeScript](http://www.typescriptlang.org/) working folder
 ## Installation
 `npm install -g ts-starter`
 ## Usage
