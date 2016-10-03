@@ -1,6 +1,6 @@
 {
     "name": "ts-starter",
-    "version": "0.2.1",
+    "version": "0.2.5",
     "description": "Initiate a TypeScript working folder.",
     "main": "dist/tss.js",
     "scripts": {
@@ -25,5 +25,6 @@
     "bugs": {
         "url": "https://github.com/Emeryao/ts-starter/issues"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "preferGlobal": true
 }
