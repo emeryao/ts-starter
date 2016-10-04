@@ -20,14 +20,18 @@ async function main() {
         return;
     }
 
-    console.log('git init...');
-    if ((await execAsync('git init', { encoding: 'utf8', cwd: param })) == false) {
-        console.log('git init fail');
-        return;
+    if (await execAsync('git --version', { encoding: 'utf8' }, false)) {
+        console.log('git init...');
+        if ((await execAsync('git init', { encoding: 'utf8', cwd: param })) == false) {
+            console.log('git init fail');
+            return;
+        }
+    } else {
+        console.log('no git installed, skip "git init"');
     }
 
     if ((await writeFileAsync(`${param}/.gitignore`, 'node_modules\r\ndist\r\n')) == false) {
-        console.log('config tsconfig.json fail');
+        console.log('add ".gitignore" fail');
         return;
     }
 
@@ -36,19 +40,11 @@ async function main() {
         return;
     }
 
-    console.log('tsc init...');
-    if ((await execAsync('tsc --init', { encoding: 'utf8', cwd: param })) == false) {
-        return;
-    }
-
-    console.log('create new subfolder : src ...');
-    if ((await mkdirAsync(`${param}/src`)) == false) {
-        return;
-    }
-
-    console.log('create new subfolder : dist ...');
-    if ((await mkdirAsync(`${param}/dist`)) == false) {
-        return;
+    if (await execAsync('npm list -g typescript', { encoding: 'utf8' }, false)) {
+        console.log('tsc init...');
+        if ((await execAsync('tsc --init', { encoding: 'utf8', cwd: param })) == false) {
+            return;
+        }
     }
 
     console.log('config tsconfig.json ...');
@@ -68,22 +64,42 @@ async function main() {
         return;
     }
 
-    console.log('typings init...');
-    if ((await execAsync('typings init', { encoding: 'utf8', cwd: param })) == false) {
-        console.log('typings init fail');
+    console.log('create new subfolder : src ...');
+    if ((await mkdirAsync(`${param}/src`)) == false) {
         return;
     }
 
-    console.log('tslint init...');
-    if ((await execAsync('tslint --init', { encoding: 'utf8', cwd: param })) == false) {
-        console.log('tslint init fail');
+    console.log('create new subfolder : dist ...');
+    if ((await mkdirAsync(`${param}/dist`)) == false) {
         return;
     }
 
-    console.log('get tslint.json from github...');
-    if ((await downloadFileAsync(`${param}/tslint.json`, 'https://raw.githubusercontent.com/Emeryao/tslint-config/master/tslint.json')) == false) {
-        console.log('get tslint.json from github fail');
-        return;
+    if (await execAsync('npm list -g typings', { encoding: 'utf8' }, false)) {
+        console.log('typings init...');
+        if ((await execAsync('typings init', { encoding: 'utf8', cwd: param })) == false) {
+            console.log('typings init fail');
+            return;
+        }
+
+        console.log('install node typings...');
+        if ((await execAsync('typings install dt~node -SG', { encoding: 'utf8', cwd: param })) == false) {
+            console.log('install node typings fail');
+            return;
+        }
+    }
+
+    if (await execAsync('npm list -g tslint', { encoding: 'utf8' }, false)) {
+        console.log('tslint init...');
+        if ((await execAsync('tslint --init', { encoding: 'utf8', cwd: param })) == false) {
+            console.log('tslint init fail');
+            return;
+        }
+
+        console.log('get tslint.json from github...');
+        if ((await downloadFileAsync(`${param}/tslint.json`, 'https://raw.githubusercontent.com/Emeryao/tslint-config/master/tslint.json')) == false) {
+            console.log('get tslint.json from github fail');
+            return;
+        }
     }
 
     console.log('DONE!');
