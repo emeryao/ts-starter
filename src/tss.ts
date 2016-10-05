@@ -2,6 +2,8 @@ import { execSync } from 'child_process';
 
 import { mkdirAsync, readFileAsync, writeFileAsync, downloadFileAsync, execAsync } from './utils';
 
+const pkgInfo = require('../package.json');
+
 main();
 
 async function main() {
@@ -9,9 +11,19 @@ async function main() {
     let param = process.argv[2];
 
     if (!param || param.length < 1) {
-        console.log('USAGE:');
-        console.log('\tPlease provide a name for the new working folder in TypeScript.');
-        console.log('\teg. "tss new-folder"');
+        console.log('\nPlease provide a name for the new working folder\n');
+        console.log('Usage: tss <new-folder-name>\n');
+        console.log(`ts-starter@${pkgInfo.version}\n`);
+        return;
+    }
+
+    if (param.indexOf('-') >= 0) {
+        if (param == '-v' || param == '--version') {
+            console.log(`${pkgInfo.version}\n`);
+        } else {
+            console.log('Usage: tss <new-folder-name>\n');
+            console.log(`ts-starter@${pkgInfo.version}\n`);
+        }
         return;
     }
 

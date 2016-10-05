@@ -1,6 +1,6 @@
 {
     "name": "ts-starter",
-    "version": "0.3.0",
+    "version": "0.3.5",
     "description": "Initiate a TypeScript working folder.",
     "main": "dist/tss.js",
     "scripts": {
