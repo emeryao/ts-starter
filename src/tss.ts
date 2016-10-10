@@ -17,7 +17,7 @@ async function main() {
         return;
     }
 
-    if (param.indexOf('-') >= 0) {
+    if (param.indexOf('-') == 0) {
         if (param == '-v' || param == '--version') {
             console.log(`${pkgInfo.version}\n`);
         } else {
@@ -42,7 +42,7 @@ async function main() {
         console.log('no git installed, skip "git init"');
     }
 
-    if ((await writeFileAsync(`${param}/.gitignore`, 'node_modules\r\ndist\r\n')) == false) {
+    if ((await writeFileAsync(`${param}/.gitignore`, 'node_modules\r\ndist\r\ntypings/globals\r\ntypings/modules\r\n')) == false) {
         console.log('add ".gitignore" fail');
         return;
     }
