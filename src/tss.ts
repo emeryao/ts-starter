@@ -27,6 +27,8 @@ async function main() {
         return;
     }
 
+    let workingFolder = process.cwd() + '/' + param;
+
     console.log('create new folder...');
     if ((await mkdirAsync(param)) == false) {
         return;
@@ -52,9 +54,9 @@ async function main() {
         return;
     }
 
-    if (await execAsync('npm list -g typescript', { encoding: 'utf8' }, false)) {
+    if (await execAsync('tsc --version', { encoding: 'utf8' }, false)) {
         console.log('tsc init...');
-        if ((await execAsync('tsc --init', { encoding: 'utf8', cwd: param })) == false) {
+        if ((await execAsync('tsc --init', { encoding: 'utf8', cwd: workingFolder })) == false) {
             return;
         }
     }
@@ -86,7 +88,7 @@ async function main() {
         return;
     }
 
-    if (await execAsync('npm list -g typings', { encoding: 'utf8' }, false)) {
+    if (await execAsync('typings -v', { encoding: 'utf8' }, false)) {
         console.log('typings init...');
         if ((await execAsync('typings init', { encoding: 'utf8', cwd: param })) == false) {
             console.log('typings init fail');
@@ -100,7 +102,7 @@ async function main() {
         }
     }
 
-    if (await execAsync('npm list -g tslint', { encoding: 'utf8' }, false)) {
+    if (await execAsync('tslint -v', { encoding: 'utf8' }, false)) {
         console.log('tslint init...');
         if ((await execAsync('tslint --init', { encoding: 'utf8', cwd: param })) == false) {
             console.log('tslint init fail');
